@@ -176,6 +176,23 @@ body {
   border-color: #b00020;
 }
 
+.btn-copy {
+  background: #fff;
+  color: #333;
+  border-color: #c9c9c9;
+}
+
+.btn-copy:hover:not(:disabled) {
+  background: #f3f3f3;
+  border-color: #888;
+}
+
+.btn-copy.copied {
+  background: #e6f4ea;
+  color: #1b7a3d;
+  border-color: #1b7a3d;
+}
+
 .loading,
 .error,
 .empty {

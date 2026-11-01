@@ -16,6 +16,7 @@ function App() {
     }
   })
   const [view, setView] = useState('fact')
+  const [copied, setCopied] = useState(false)
 
   useEffect(() => {
     if (favorites.length) {
@@ -46,6 +47,17 @@ function App() {
     if (!fact) return
     if (favorites.some(f => f.fact === fact.fact)) return
     setFavorites(prev => [fact, ...prev])
+  }
+
+  const copyFact = async () => {
+    if (!fact) return
+    try {
+      await navigator.clipboard.writeText(fact.fact)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1800)
+    } catch {
+      setError('Could not copy to clipboard')
+    }
   }
 
   const removeFavorite = (factText) => {
@@ -100,6 +112,13 @@ function App() {
               >
                 ♥
                 Favorite
+              </button>
+              <button
+                className={`btn btn-copy ${copied ? 'copied' : ''}`}
+                onClick={copyFact}
+                disabled={!fact || loading}
+              >
+                {copied ? '✓ Copied' : '📋 Copy fact'}
               </button>
             </div>
           </section>
